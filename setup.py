@@ -3,14 +3,14 @@ from setuptools import setup, find_packages
 
 
 setup(
-    name='moear-spider-zhihudaily',
-    url='https://github.com/littlemo',
+    name='moear-spider-common',
+    url='https://github.com/littlemo/moear-spider-common',
     author='moear developers',
     author_email='moore@moorehy.com',
-    maintainer='Moore Huang',
+    maintainer='littlemo',
     maintainer_email='moore@moorehy.com',
-    version='1.0',
-    description='用于为MoEar提供知乎日报扩展爬虫功能插件',
+    version='1.0.0',
+    description='MoEar扩展爬虫功能插件的通用组件',
     long_description='''
         用以实现抽象类定义爬虫所需提供的服务接口，以及一些通用工具方法
     ''',
