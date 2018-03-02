@@ -21,7 +21,7 @@ class SpiderBase(object):
         pass
 
     @abc.abstractmethod
-    def register(self):
+    def register(self, *args, **kwargs):
         """
         注册
         ----
@@ -32,7 +32,7 @@ class SpiderBase(object):
         """
 
     @abc.abstractmethod
-    def crawl(self):
+    def crawl(self, *args, **kwargs):
         """
         爬取
         ----
@@ -43,7 +43,7 @@ class SpiderBase(object):
         """
 
     @abc.abstractmethod
-    def format(self, data):
+    def format(self, data, *args, **kwargs):
         """
         格式化
         ------
