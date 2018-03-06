@@ -142,11 +142,11 @@ def getOpts(output_type='kindle', book_mode='periodical'):
 
 def setMetaData(
         oeb, title='Feeds', lang='zh-cn', date=None,
-        creator='KindleEar', pubtype='periodical:magazine:KindleEar'):
+        creator='MoEar', pubtype='periodical:magazine:MoEar'):
     """
     设置oeb的元数据
 
-    :param pubtype: 'periodical:magazine:KindleEar' | 'book:book:KindleEar'
+    :param pubtype: 'periodical:magazine:MoEar' | 'book:book:MoEar'
     :type pubtype: str
     """
     oeb.metadata.add('language', lang if lang else 'zh-cn')
