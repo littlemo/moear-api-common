@@ -4,12 +4,16 @@ Post打包系统默认配置项
 
 将在注册加载时填充到系统全局配置中
 """
+import os
+
+base_dir = os.path.dirname(os.path.abspath(__file__))
+images_path = os.path.join(base_dir, 'images')
 
 # 报头图片
-img_masthead = 'mh_default.gif'
+img_masthead = os.path.join(images_path, 'mh_default.gif')
 
 # 封面图片，留空则不会为书籍增加封面
-img_cover = 'cv_default.jpg'
+img_cover = os.path.join(images_path, 'cv_default.jpg')
 
 # 合并图书的封面图片，留空则将所有书籍封面贴在一起
 img_cover_bv = img_cover
