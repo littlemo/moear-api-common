@@ -5,14 +5,14 @@ Post打包系统默认配置项
 将在注册加载时填充到系统全局配置中
 """
 
-# 默认报头
-img_masthead_default = 'mh_default.gif'
+# 报头图片
+img_masthead = 'mh_default.gif'
 
-# 默认封面，留空则不会为书籍增加封面
-img_cover_default = 'cv_default.jpg'
+# 封面图片，留空则不会为书籍增加封面
+img_cover = 'cv_default.jpg'
 
-# 合并图书的默认封面，留空则将所有书籍封面贴在一起
-img_cover_bv_default = img_cover_default
+# 合并图书的封面图片，留空则将所有书籍封面贴在一起
+img_cover_bv = img_cover
 
 feeds_title = 'MoEar'
 feeds_desc = 'RSS delivering from MoEar'
