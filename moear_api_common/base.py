@@ -1,7 +1,7 @@
 import abc
 import six
 
-import config
+from . import config
 
 
 @six.add_metaclass(abc.ABCMeta)
