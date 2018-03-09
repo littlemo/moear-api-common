@@ -89,7 +89,7 @@ class PackageBase(object):
         self.settings.update(settings)
 
     @abc.abstractmethod
-    def generate(self, data, *args, **kwargs):
+    def generate(self, data, usermeta, *args, **kwargs):
         """
         生成
         ----
@@ -98,5 +98,6 @@ class PackageBase(object):
         MoEar会将其持久化并用于之后的推送任务
 
         :params data dict: 待打包的数据结构
+        :params usermeta dict: 指定用户的package相关配置元数据
         :returns: byteStringIO, 返回生成的书籍打包输出对象
         """
