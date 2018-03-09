@@ -89,7 +89,7 @@ class PackageBase(object):
         self.settings.update(settings)
 
     @abc.abstractmethod
-    def generate(self, data, usermeta, *args, **kwargs):
+    def generate(self, data, spider, usermeta, *args, **kwargs):
         """
         生成
         ----
@@ -98,6 +98,8 @@ class PackageBase(object):
         MoEar会将其持久化并用于之后的推送任务
 
         :params data dict: 待打包的数据结构
+        :params spider dict: 指定爬虫的信息数据(包括 'meta' 字段的元数据字典，
+            其中需包含书籍名称用的时间戳)
         :params usermeta dict: 指定用户的package相关配置元数据
         :returns: byteStringIO, 返回生成的书籍打包输出对象
         """
