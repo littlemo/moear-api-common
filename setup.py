@@ -21,7 +21,9 @@ setup(
     provides=[
         'moear.api',
     ],
-    install_requires=[],
+    install_requires=[
+        'six~=1.11.0',
+    ],
     entry_points={},
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
