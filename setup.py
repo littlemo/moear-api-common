@@ -24,6 +24,7 @@ setup(
     install_requires=[
         'six~=1.11.0',
         'Pillow~=5.0.0',
+        'lxml~=4.1.1',
     ],
     entry_points={},
     classifiers=[
