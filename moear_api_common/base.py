@@ -72,7 +72,14 @@ class PackageBase(object):
         """
         初始化默认配置参数，可在子类中进行覆盖
         """
-        self.settings = dict(config)
+        dst = {}
+        tmp = config.__dict__
+        key_list = dir(config)
+        key_list.remove('os')
+        for k, v in tmp.items():
+            if k in key_list and not k.startswith('__'):
+                dst[k] = v
+        self.settings = dst
 
     def configure(self, settings):
         """
