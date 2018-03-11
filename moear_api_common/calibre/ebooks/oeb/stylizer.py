@@ -126,7 +126,7 @@ class CaseInsensitiveAttributesTranslator(HTMLTranslator):
 
 ci_css_to_xpath = CaseInsensitiveAttributesTranslator().css_to_xpath
 
-NULL_NAMESPACE_REGEX = re.compile(ur'''(name\(\) = ['"])h:''')
+NULL_NAMESPACE_REGEX = re.compile(r'''(name\(\) = ['"])h:''')
 def fix_namespace(raw):
     '''
     cssselect uses name() = 'h:p' to select tags for some CSS selectors (e.g.
@@ -135,7 +135,7 @@ def fix_namespace(raw):
     prefix), name() is the same as local-name(). So this is a hack to
     workaround the problem.
     '''
-    return NULL_NAMESPACE_REGEX.sub(ur'\1', raw)
+    return NULL_NAMESPACE_REGEX.sub(r'\1', raw)
 
 class CSSSelector(object):
 
@@ -310,7 +310,7 @@ class Stylizer(object):
         rules.sort()
         self.rules = rules
         self._styles = {}
-        pseudo_pat = re.compile(ur':(first-letter|first-line|link|hover|visited|active|focus|before|after)', re.I)
+        pseudo_pat = re.compile(r':(first-letter|first-line|link|hover|visited|active|focus|before|after)', re.I)
         for _, _, cssdict, text, _ in rules:
             fl = pseudo_pat.search(text)
             if fl is not None:

@@ -3,7 +3,7 @@ __copyright__ = '2008, Kovid Goyal kovid@kovidgoyal.net'
 __docformat__ = 'restructuredtext en'
 __appname__   = u'calibre'
 numeric_version = (1, 0, 0)
-__version__   = u'.'.join(map(unicode, numeric_version))
+__version__   = u'.'.join(map(str, numeric_version))
 __author__    = u"Kovid Goyal <kovid@kovidgoyal.net>"
 
 '''
@@ -36,5 +36,5 @@ else:
 
 DEBUG = False
 plugins = None
-CONFIG_DIR_MODE = 0700
+CONFIG_DIR_MODE = 0o700
 config_dir = ""

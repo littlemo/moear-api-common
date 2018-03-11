@@ -7,7 +7,7 @@ __copyright__ = '2009, Kovid Goyal <kovid@kovidgoyal.net>'
 __docformat__ = 'restructuredtext en'
 
 def remove_html_cover(oeb, log):
-    from calibre.ebooks.oeb.base import OEB_DOCS
+    from ..oeb.base import OEB_DOCS
 
     if not oeb.metadata.cover \
         or 'cover' not in oeb.guide:
@@ -26,7 +26,7 @@ def remove_html_cover(oeb, log):
 
 def extract_mobi(output_path, opts):
     if opts.extract_to is not None:
-        from calibre.ebooks.mobi.debug.main import inspect_mobi
+        from ..mobi.debug.main import inspect_mobi
         ddir = opts.extract_to
         inspect_mobi(output_path, ddir=ddir)
 
@@ -34,11 +34,11 @@ class MOBIOutput:
     name = 'MOBI Output'
     author = 'Kovid Goyal'
     file_type = 'mobi'
-    
+
     @property
     def is_periodical(self):
         return self.oeb.metadata.publication_type and \
-            unicode(self.oeb.metadata.publication_type[0]).startswith('periodical:')
+            str(self.oeb.metadata.publication_type[0]).startswith('periodical:')
 
     def check_for_periodical(self):
         if self.is_periodical:
@@ -51,9 +51,9 @@ class MOBIOutput:
     def check_for_masthead(self):
         found = 'masthead' in self.oeb.guide
         if not found:
-            from calibre.ebooks import generate_masthead
+            from .. import generate_masthead
             self.oeb.log.debug('No masthead found in manifest, generating default mastheadImage...')
-            raw = generate_masthead(unicode(self.oeb.metadata['title'][0]))
+            raw = generate_masthead(str(self.oeb.metadata['title'][0]))
             id, href = self.oeb.manifest.generate('masthead', 'masthead')
             self.oeb.manifest.add(id, href, 'image/gif', data=raw)
             self.oeb.guide.add('masthead', 'Masthead Image', href)
@@ -62,8 +62,8 @@ class MOBIOutput:
 
     def periodicalize_toc(self):
         #return #commit by arroz, you have to create a toc hiberarchy youself.
-        
-        from calibre.ebooks.oeb.base import TOC
+
+        from ..oeb.base import TOC
         toc = self.oeb.toc
         if not toc: # or len(self.oeb.spine) < 3:
             return
@@ -102,7 +102,7 @@ class MOBIOutput:
                     sec.nodes.remove(a)
 
             root = TOC(klass='periodical', href=self.oeb.spine[0].href, play_order=0, id='periodical',
-                    title=unicode(self.oeb.metadata.title[0]))
+                    title=str(self.oeb.metadata.title[0]))
             #建立 root/Sections/artcicles三层结构
             for s in sections:
                 if articles[id(s)]:
@@ -119,7 +119,7 @@ class MOBIOutput:
             toc.nodes[0].href = toc.nodes[0].nodes[0].href
 
     def convert(self, oeb, output_path, opts, log):
-        from calibre.ebooks.mobi.writer2.resources import Resources
+        from ..mobi.writer2.resources import Resources
         self.log, self.opts, self.oeb = log, opts, oeb
 
         mobi_type = opts.mobi_file_type
@@ -131,11 +131,11 @@ class MOBIOutput:
         resources = Resources(oeb, opts, self.is_periodical,
                 add_fonts=create_kf8, process_images=opts.process_images)
         self.check_for_periodical()
-        
+
         if create_kf8:
             # Split on pagebreaks so that the resulting KF8 works better with
             # calibre's viewer, which does not support CSS page breaks
-            from calibre.ebooks.oeb.transforms.split import Split
+            from ..oeb.transforms.split import Split
             Split()(self.oeb, self.opts)
 
 
@@ -150,15 +150,15 @@ class MOBIOutput:
         self.write_mobi(output_path, kf8, resources)
 
     def create_kf8(self, resources, for_joint=False):
-        from calibre.ebooks.mobi.writer8.main import create_kf8_book
+        from ..mobi.writer8.main import create_kf8_book
         return create_kf8_book(self.oeb, self.opts, resources,
                 for_joint=for_joint)
 
     def write_mobi(self, output_path, kf8, resources):
-        from calibre.ebooks.mobi.mobiml import MobiMLizer
-        from calibre.ebooks.oeb.transforms.manglecase import CaseMangler
-        from calibre.ebooks.oeb.transforms.htmltoc import HTMLTOCAdder
-        
+        from ..mobi.mobiml import MobiMLizer
+        from ..oeb.transforms.manglecase import CaseMangler
+        from ..oeb.transforms.htmltoc import HTMLTOCAdder
+
         opts, oeb = self.opts, self.oeb
         if not opts.no_inline_toc:
             tocadder = HTMLTOCAdder(title=opts.toc_title, position='start' if
@@ -166,26 +166,26 @@ class MOBIOutput:
             tocadder(oeb, opts)
         mangler = CaseMangler()
         mangler(oeb, opts)
-        
+
         if hasattr(self.oeb, 'inserted_metadata_jacket'):
             self.workaround_fire_bugs(self.oeb.inserted_metadata_jacket)
         mobimlizer = MobiMLizer(ignore_tables=opts.linearize_tables)
         mobimlizer(oeb, opts)
         write_page_breaks_after_item = True
-        from calibre.ebooks.mobi.writer2.main import MobiWriter
+        from ..mobi.writer2.main import MobiWriter
         writer = MobiWriter(opts, resources, kf8,
                         write_page_breaks_after_item=write_page_breaks_after_item)
         writer(oeb, output_path)
         extract_mobi(output_path, opts)
 
     def specialize_css_for_output(self, log, opts, item, stylizer):
-        from calibre.ebooks.mobi.writer8.cleanup import CSSCleanup
+        from ..mobi.writer8.cleanup import CSSCleanup
         CSSCleanup(log, opts)(item, stylizer)
 
     def workaround_fire_bugs(self, jacket):
         # The idiotic Fire crashes when trying to render the table used to
         # layout the jacket
-        from calibre.ebooks.oeb.base import XHTML
+        from ..oeb.base import XHTML
         for table in jacket.data.xpath('//*[local-name()="table"]'):
             table.tag = XHTML('div')
             for tr in table.xpath('descendant::*[local-name()="tr"]'):

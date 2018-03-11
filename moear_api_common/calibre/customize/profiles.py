@@ -4,9 +4,9 @@ __license__ = 'GPL 3'
 __copyright__ = '2009, Kovid Goyal <kovid@kovidgoyal.net>'
 __docformat__ = 'restructuredtext en'
 
-from itertools import izip
-
-from calibre.customize import Plugin as _Plugin
+import operator
+from functools import cmp_to_key
+from . import Plugin as _Plugin
 
 FONT_SIZES = [('xx-small', 1),
               ('x-small',  None),
@@ -31,7 +31,7 @@ class Plugin(_Plugin):
         fsizes = list(self.fsizes)
         self.fkey = list(self.fsizes)
         self.fsizes = []
-        for (name, num), size in izip(FONT_SIZES, fsizes):
+        for (name, num), size in zip(FONT_SIZES, fsizes):
             self.fsizes.append((name, num, float(size)))
         self.fnames = dict((name, sz) for name, _, sz in self.fsizes if name)
         self.fnums = dict((num, sz) for _, num, sz in self.fsizes if num)
@@ -234,7 +234,10 @@ input_profiles = [InputProfile, SonyReaderInput, SonyReader300Input,
         HanlinV5Input, CybookG3Input, CybookOpusInput, KindleInput, IlliadInput,
         IRexDR1000Input, IRexDR800Input, NookInput]
 
-input_profiles.sort(cmp=lambda x,y:cmp(x.name.lower(), y.name.lower()))
+
+_key = cmp_to_key(lambda x, y: operator.gt(x.name.lower(), y.name.lower()))
+input_profiles.sort(key=_key)
+
 
 # }}}
 
@@ -859,4 +862,4 @@ output_profiles = [
     KindlePaperWhite3Output
 ]
 
-output_profiles.sort(cmp=lambda x,y:cmp(x.name.lower(), y.name.lower()))
+output_profiles.sort(key=_key)

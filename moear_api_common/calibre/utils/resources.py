@@ -7,9 +7,9 @@ __copyright__ = '2009, Kovid Goyal <kovid@kovidgoyal.net>'
 __docformat__ = 'restructuredtext en'
 
 
-import __builtin__
+import builtins
 
-from calibre import config_dir
+from ...calibre import config_dir
 
 #_resolver = PathResolver()
 
@@ -26,5 +26,5 @@ def get_image_path(path, data=False, allow_user_override=True):
         return get_path('images')
     return get_path('images/'+path, data=data)
 
-__builtin__.__dict__['P'] = get_path
-__builtin__.__dict__['I'] = get_image_path
+builtins.__dict__['P'] = get_path
+builtins.__dict__['I'] = get_image_path

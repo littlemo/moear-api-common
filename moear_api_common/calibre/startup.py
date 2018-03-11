@@ -9,21 +9,21 @@ Perform various initialization tasks.
 import locale, sys, os, re
 
 # Default translation is NOOP
-import __builtin__
-__builtin__.__dict__['_'] = lambda s: s
+import builtins
+builtins.__dict__['_'] = lambda s: s
 
 # For strings which belong in the translation tables, but which shouldn't be
 # immediately translated to the environment language
-__builtin__.__dict__['__'] = lambda s: s
-__builtin__.__dict__['P'] = lambda s: s
-__builtin__.__dict__['I'] = lambda s: s
-__builtin__.__dict__['lopen'] = open
-__builtin__.__dict__['icu_lower'] = lambda x:x.lower()
-__builtin__.__dict__['icu_upper'] = lambda x:x.upper()
-__builtin__.__dict__['icu_title'] = lambda x:x.capitalize()
-__builtin__.__dict__['dynamic_property'] = lambda func: func(None)
+builtins.__dict__['__'] = lambda s: s
+builtins.__dict__['P'] = lambda s: s
+builtins.__dict__['I'] = lambda s: s
+builtins.__dict__['lopen'] = open
+builtins.__dict__['icu_lower'] = lambda x:x.lower()
+builtins.__dict__['icu_upper'] = lambda x:x.upper()
+builtins.__dict__['icu_title'] = lambda x:x.capitalize()
+builtins.__dict__['dynamic_property'] = lambda func: func(None)
 
-from calibre.constants import *
+from ..calibre.constants import *
 
 _run_once = False
 winutil = winutilerror = None

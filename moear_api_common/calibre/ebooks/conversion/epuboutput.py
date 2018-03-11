@@ -7,7 +7,7 @@ __copyright__ = '2009, Kovid Goyal <kovid@kovidgoyal.net>'
 __docformat__ = 'restructuredtext en'
 
 import os, zipfile, re
-from calibre.utils.img import rescale_image
+from ...utils.img import rescale_image
 
 block_level_tags = (
       'address',
@@ -48,9 +48,9 @@ def getepubOpts():
     setattr(opts, "epub_flatten", False)
     setattr(opts, "output_profile", KindleOutput(None))
     setattr(opts, "pretty_print", True)
-    
+
     return opts
-    
+
 class EPUBOutput:
     name = 'EPUB Output'
     author = 'Kovid Goyal'
@@ -145,10 +145,10 @@ class EPUBOutput:
 
         from calibre.ebooks.oeb.base import OPF_MIME, NCX_MIME, PAGE_MAP_MIME
         results = oeb.to_opf2(page_map=True)
-        
+
         epub = zipfile.ZipFile(output_path, "w", zipfile.ZIP_STORED)
         epub.writestr('mimetype', "application/epub+zip")
-        
+
         CONTAINER = u'''\
 <?xml version="1.0"?>
 <container version="1.0" xmlns="urn:oasis:names:tc:opendocument:xmlns:container">
@@ -170,7 +170,7 @@ class EPUBOutput:
                         compress_type=compress)
                 raw = etree.tostring(root, pretty_print=True,encoding='utf-8', xml_declaration=True)
                 epub.writestr('OEBPS/%s' % href, raw)
-        
+
         from calibre.ebooks.oeb.base import OEB_RASTER_IMAGES
         for item in oeb.manifest:
             if item.media_type in OEB_RASTER_IMAGES:
@@ -182,7 +182,7 @@ class EPUBOutput:
                     epub.writestr('OEBPS/%s' % item.href, img, compress_type=compress)
             else:
                 epub.writestr('OEBPS/%s' % item.href, str(item), compress_type=compress)
-    
+
     def process_image(self, data):
         if not self.opts.process_images or self.opts.process_images_immediately:
             return data
@@ -192,7 +192,7 @@ class EPUBOutput:
             return rescale_image(data, png2jpg=self.opts.image_png_to_jpg,
                             graying=self.opts.graying_image,
                             reduceto=self.opts.reduce_image_to)
-    
+
     def workaround_ade_quirks(self):
         """
         Perform various markup transforms to get the output to render correctly

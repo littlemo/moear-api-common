@@ -9,11 +9,11 @@ __copyright__ = '2008, Marshall T. Vandegrift <llasram@gmail.cam>'
 import copy
 import re
 from lxml import etree
-from calibre.ebooks.oeb.base import namespace, barename
-from calibre.ebooks.oeb.base import XHTML, XHTML_NS, urlnormalize
-from calibre.ebooks.oeb.stylizer import Stylizer
-from calibre.ebooks.oeb.transforms.flatcss import KeyMapper
-from calibre.utils.img import identify_data
+from ..oeb.base import namespace, barename
+from ..oeb.base import XHTML, XHTML_NS, urlnormalize
+from ..oeb.stylizer import Stylizer
+from ..oeb.transforms.flatcss import KeyMapper
+from ...utils.img import identify_data
 
 MBP_NS = 'http://mobipocket.com/ns/mbp'
 def MBP(name):
@@ -123,7 +123,7 @@ class MobiMLizer(object):
             self.mobimlize_elem(body, stylizer, BlockState(nbody),
                                 [FormatState()])
             item.data = nroot
-            #print etree.tostring(nroot)
+            #print(etree.tostring(nroot))
 
     def mobimlize_font(self, ptsize):
         return self.fnums[self.fmap[ptsize]]
@@ -218,7 +218,7 @@ class MobiMLizer(object):
             try:
                 etree.SubElement(para, XHTML(tag), attrib=istate.attrib)
             except:
-                print 'Invalid subelement:', para, tag, istate.attrib
+                print('Invalid subelement:', para, tag, istate.attrib)
                 raise
         elif tag in TABLE_TAGS:
             para.attrib['valign'] = 'top'

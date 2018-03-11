@@ -2,11 +2,11 @@
 # -*- coding:utf-8 -*-
 #仿照StringIO创建的类二进制文件内存读写对象
 import os, sys
-from calibre.constants import preferred_encoding
+from ..constants import preferred_encoding
 
 def _complain_ifclosed(closed):
     if closed:
-        raise ValueError, "I/O operation on closed file"
+        raise ValueError("I/O operation on closed file")
 
 class byteStringIO:
     def __init__(self, buf = ''):
@@ -15,22 +15,22 @@ class byteStringIO:
         self.len = 0
         self.closed = False
         self.pos = 0
-        
+
     def __iter__(self):
         return self
-        
+
     def next(self):
         _complain_ifclosed(self.closed)
         r = self.read(1)
         if not r:
             raise StopIteration
         return r
-    
+
     def close(self):
         if not self.closed:
             self.closed = True
             del self.buflist, self.buf
-    
+
     def seek(self, pos, mode = 0):
         _complain_ifclosed(self.closed)
         for b in self.buflist: # 先整合list
@@ -44,12 +44,12 @@ class byteStringIO:
         elif mode == 2:
             pos += self.len
         self.pos = max(0, pos)
-    
+
     def tell(self):
         """Return the file's current position."""
         _complain_ifclosed(self.closed)
         return self.pos
-        
+
     def read(self, n = -1):
         _complain_ifclosed(self.closed)
         if not s: return
@@ -66,7 +66,7 @@ class byteStringIO:
         r = self.buf[self.pos:newpos]
         self.pos = newpos
         return r
-    
+
     def write(self, s):
         _complain_ifclosed(self.closed)
         if not s: return
@@ -89,7 +89,7 @@ class byteStringIO:
                     self.buf = b
                 else:
                     self.buf += b
-            
+
             self.buflist = [self.buf[:spos], s, self.buf[newpos:]]
             self.buf = ''
             if newpos > slen:
@@ -112,4 +112,4 @@ class byteStringIO:
                 self.buf += b
         self.buflist = []
         return self.buf
-        
+

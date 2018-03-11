@@ -8,8 +8,8 @@ __docformat__ = 'restructuredtext en'
 import os
 from PIL import Image
 
-from calibre.utils.imghdr import what
-from StringIO import StringIO
+from .imghdr import what
+from io import StringIO
 
 def identify_data(data):
     '''
@@ -18,14 +18,14 @@ def identify_data(data):
     or raises an Exception if data is not an image.
     '''
     if not isinstance(data, StringIO):
-        data = StringIO(data)    
+        data = StringIO(data)
     img = Image.open(data)
     width, height = img.size
     fmt = img.format
     return (width, height, fmt)
-    
-    
-def rescale_image(data, maxsizeb=4000000, dimen=None, 
+
+
+def rescale_image(data, maxsizeb=4000000, dimen=None,
                 png2jpg=False, graying=True, reduceto=(600,800)):
     '''
     Convert image setting all transparent pixels to white and changing format
@@ -45,9 +45,9 @@ def rescale_image(data, maxsizeb=4000000, dimen=None,
     fmt = img.format
     if graying and img.mode != "L":
         img = img.convert("L")
-    
+
     reducewidth, reduceheight = reduceto
-    
+
     if dimen is not None:
         if hasattr(dimen, '__len__'):
             width, height = dimen
@@ -71,7 +71,7 @@ def rescale_image(data, maxsizeb=4000000, dimen=None,
     else:
         data = StringIO()
         img.save(data, fmt)
-    
+
     return data.getvalue()
 
 def mobify_image(data):

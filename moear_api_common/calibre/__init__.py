@@ -6,7 +6,7 @@ __docformat__ = 'restructuredtext en'
 import sys, os, re, time
 from functools import partial
 
-from calibre.constants import (iswindows, 
+from .constants import (iswindows,
         preferred_encoding, __appname__, __version__, __author__,
         winerror, filesystem_encoding, plugins, config_dir)
 
@@ -95,7 +95,7 @@ def sanitize_file_name(name, substitute='_', as_unicode=False):
     if isinstance(name, unicode):
         name = name.encode(filesystem_encoding, 'ignore')
     _filename_sanitize = re.compile(r'[\xae\0\\|\?\*<":>\+/]')
-    
+
     one = _filename_sanitize.sub(substitute, name)
     one = re.sub(r'\s', ' ', one).strip()
     bname, ext = os.path.splitext(one)

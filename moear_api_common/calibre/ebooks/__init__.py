@@ -8,8 +8,8 @@ from various formats.
 '''
 
 import traceback, os, re
-from cStringIO import StringIO
-from calibre import CurrentDir, force_unicode
+from io import StringIO
+from .. import CurrentDir, force_unicode
 
 class ConversionError(Exception):
 
@@ -183,7 +183,7 @@ def calibre_cover(title, author_string, series_string=None,
 UNIT_RE = re.compile(r"^(-*[0-9]*[.]?[0-9]*)\s*(%|em|ex|en|px|mm|cm|in|pt|pc)$")
 
 def unit_convert(value, base, font, dpi):
-    #Return value in pts 
+    #Return value in pts
     if isinstance(value, (int, long, float)):
         return value
     try:
@@ -220,7 +220,7 @@ def unit_convert(value, base, font, dpi):
 
 def generate_masthead(title, output_path=None, width=600, height=60):
     from PIL import Image, ImageDraw #, ImageFont #gae dont support ImageFont
-    
+
     #modify by arroz, resize a small to 3x, better than nothing
     wo,ho = 200, 20
     img = Image.new('RGB', (wo, ho), 'white')

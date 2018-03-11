@@ -7,8 +7,8 @@ import uuid
 import logging
 
 # 这两个是必须先引入的，会有一些全局初始化
-import ..calibre.startup
-import ..calibre.utils.resources
+from ..calibre import startup
+from ..calibre.utils import resources
 
 from ..calibre.ebooks.conversion.mobioutput import MOBIOutput
 from ..calibre.ebooks.conversion.epuboutput import EPUBOutput
@@ -67,8 +67,8 @@ class ServerContainer(object):
 
 def CreateOeb(log, path_or_stream, opts, encoding='utf-8'):
     """创建一个空的OEB书籍"""
-    from calibre.ebooks.conversion.preprocess import HTMLPreProcessor
-    from calibre.ebooks.oeb.base import OEBBook
+    from ..calibre.ebooks.conversion.preprocess import HTMLPreProcessor
+    from ..calibre.ebooks.oeb.base import OEBBook
     html_preprocessor = HTMLPreProcessor(log, opts)
     if not encoding:
         encoding = None
@@ -82,7 +82,7 @@ def CreateOeb(log, path_or_stream, opts, encoding='utf-8'):
 
 def getOpts(output_type='kindle', book_mode='periodical'):
     """OEB的一些生成选项"""
-    from calibre.customize.profiles import (
+    from ..calibre.customize.profiles import (
         KindleOutput, KindlePaperWhiteOutput, KindleDXOutput, KindleFireOutput,
         KindleVoyageOutput, KindlePaperWhite3Output, OutputProfile)
     opts = OptionValues()
@@ -114,11 +114,11 @@ def getOpts(output_type='kindle', book_mode='periodical'):
     setattr(opts, "change_justification", "Left")
     setattr(opts, "process_images", True)
     setattr(opts, "mobi_keep_original_images", False)
-    setattr(opts, "graying_image", config.COLOR_TO_GRAY)  # changed
-    setattr(opts, "image_png_to_jpg", config.COLOR_TO_GRAY)  # changed
+    setattr(opts, "graying_image", config.color_to_gray)  # changed
+    setattr(opts, "image_png_to_jpg", config.color_to_gray)  # changed
     setattr(opts, "fix_indents", False)
-    if config.REDUCE_IMAGE_TO:
-        setattr(opts, "reduce_image_to", config.REDUCE_IMAGE_TO)
+    if config.reduce_image_to:
+        setattr(opts, "reduce_image_to", config.reduce_image_to)
     else:
         setattr(opts, "reduce_image_to",
                 OutputDevice.comic_screen_size

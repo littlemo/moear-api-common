@@ -11,9 +11,9 @@ import re
 
 from lxml import etree, html
 
-from calibre import xml_replace_entities, force_unicode
-from calibre.constants import filesystem_encoding
-from calibre.ebooks.chardet import xml_to_unicode, strip_encoding_declarations
+from ... import xml_replace_entities, force_unicode
+from ...constants import filesystem_encoding
+from ...ebooks.chardet import xml_to_unicode, strip_encoding_declarations
 
 RECOVER_PARSER = etree.XMLParser(recover=True, no_network=True)
 XHTML_NS     = 'http://www.w3.org/1999/xhtml'

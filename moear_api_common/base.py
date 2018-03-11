@@ -213,7 +213,7 @@ class PackageBase(object):
                 '<h2>%s</h2><ul>' % (toc_title)]
             html_toc_1_ = []
             # We need index but not reversed()
-            for a in xrange(len(html_toc_2) - 1, -1, -1):
+            for a in range(len(html_toc_2) - 1, -1, -1):
                 # Generate Secondary HTML TOC
                 id_, href = oeb.manifest.generate(
                     id='section', href='toc_%d.html' % (a))
@@ -238,23 +238,24 @@ class PackageBase(object):
 
         # Generate NCX TOC for Kindle
         po = 1
-        toc = oeb.toc.add(unicode(
+        toc = oeb.toc.add(str(
             oeb.metadata.title[0]), oeb.spine[0].href,
             id='periodical', klass='periodical', play_order=po)
         po += 1
         for ncx in ncx_toc:
+            insertThumbnail = False
             if insertThumbnail and ncx[4]:
                 toc_thumbnail = toc_thumbnails[ncx[4]]
             else:
                 toc_thumbnail = None
 
             if ncx[0] == 'section':
-                sectoc = toc.add(unicode(
+                sectoc = toc.add(str(
                     ncx[1]), ncx[2], klass='section',
                     play_order=po, id='Main-section-%d' % po,
                     toc_thumbnail=toc_thumbnail)
             elif sectoc:
-                sectoc.add(unicode(
+                sectoc.add(str(
                     ncx[1]), ncx[2], description=ncx[3] if ncx[3] else None,
                     klass='article', play_order=po,
                     id='article-%d' % po, toc_thumbnail=toc_thumbnail)

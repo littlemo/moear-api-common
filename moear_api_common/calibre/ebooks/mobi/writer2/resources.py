@@ -7,11 +7,11 @@ __license__   = 'GPL v3'
 __copyright__ = '2012, Kovid Goyal <kovid@kovidgoyal.net>'
 __docformat__ = 'restructuredtext en'
 
-from calibre.ebooks.mobi import MAX_THUMB_DIMEN, MAX_THUMB_SIZE
-from calibre.utils.img import rescale_image, mobify_image
-from calibre.ebooks import generate_masthead
-from calibre.ebooks.oeb.base import OEB_RASTER_IMAGES
-from calibre.utils.imghdr import what
+from .. import MAX_THUMB_DIMEN, MAX_THUMB_SIZE
+from ....utils.img import rescale_image, mobify_image
+from ... import generate_masthead
+from ...oeb.base import OEB_RASTER_IMAGES
+from ....utils.imghdr import what
 
 PLACEHOLDER_GIF = b'GIF89a\x01\x00\x01\x00\x80\x00\x00\x00\x00\x00\xff\xff\xff!\xf9\x04\x01\x00\x00\x00\x00,\x00\x00\x00\x00\x01\x00\x01\x00@\x02\x01D\x00;'
 
@@ -43,7 +43,7 @@ class Resources(object):
             return rescale_image(data, png2jpg=self.opts.image_png_to_jpg,
                             graying=self.opts.graying_image,
                             reduceto=self.opts.reduce_image_to)
-        
+
     def add_resources(self, add_fonts):
         oeb = self.oeb
         oeb.logger.info('Serializing resources...')
@@ -58,7 +58,7 @@ class Resources(object):
             self.image_indices.add(0)
         elif self.is_periodical:
             # Generate a default masthead
-            data = generate_masthead(unicode(self.oeb.metadata['title'][0]))
+            data = generate_masthead(str(self.oeb.metadata['title'][0]))
             self.records.append(data)
             self.used_image_indices.add(0)
             self.image_indices.add(0)
@@ -66,25 +66,25 @@ class Resources(object):
 
         cover_href = self.cover_offset = self.thumbnail_offset = None
         if (oeb.metadata.cover and
-                unicode(oeb.metadata.cover[0]) in oeb.manifest.ids):
-            cover_id = unicode(oeb.metadata.cover[0])
+                str(oeb.metadata.cover[0]) in oeb.manifest.ids):
+            cover_id = str(oeb.metadata.cover[0])
             item = oeb.manifest.ids[cover_id]
             cover_href = item.href
 
         for item in self.oeb.manifest.values():
             if item.media_type not in OEB_RASTER_IMAGES:
                 continue
-            
+
             try:
                 data = self.process_image(item.data)
-            except Exception,e:
+            except Exception as e:
                 self.log.warn('Bad image file %r : %s' % (item.href,str(e)))
                 continue
             else:
                 if mh_href and item.href == mh_href:
                     self.records[0] = data
                     continue
-                
+
                 self.image_indices.add(len(self.records))
                 self.records.append(data)
                 self.item_map[item.href] = index
