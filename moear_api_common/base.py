@@ -67,9 +67,14 @@ class PackageBase(object):
 
     用以作为抽象类定义打包驱动所需提供的服务接口
     """
-    def __init__(self, *args, **kwargs):
+    def __init__(self, spider, *args, **kwargs):
         """
         初始化默认配置参数，可在子类中进行覆盖
+
+        :params spider dict: （必须）指定爬虫的信息数据(包括 'meta' 字段的元数据字典，
+            其中需包含书籍名称用的时间戳)
+        :params pkgmeta dict: （可选，关键字参数）指定当前package相关的动态配置元数据，如：定制书籍名、作者、时间戳等
+        :params usermeta dict: （可选，关键字参数）指定用户的package相关配置元数据
         """
         dst = {}
         tmp = config.__dict__
@@ -78,9 +83,18 @@ class PackageBase(object):
         for k, v in tmp.items():
             if k in key_list and not k.startswith('__'):
                 dst[k] = v
-        self.settings = dst
+        self.options = dst
 
-    def configure(self, settings):
+        # 依照优先级，逐级更新 options 数据
+        self.configure(getattr(spider, 'meta', {}))
+        self.configure(getattr(kwargs, 'pkgmeta', {}))
+        self.configure(getattr(kwargs, 'usermeta', {}))
+
+        # 弹出 meta 字段，并赋值实例变量
+        spider.pop('meta')
+        self.spider = spider
+
+    def configure(self, options):
         """
         更新自定义配置
         --------------
@@ -93,10 +107,10 @@ class PackageBase(object):
 
         即优先级为：Spider自定义 > 具体Package配置 > Package全局默认配置
         """
-        self.settings.update(settings)
+        self.options.update(options)
 
     @abc.abstractmethod
-    def generate(self, data, spider, usermeta, *args, **kwargs):
+    def generate(self, data, *args, **kwargs):
         """
         生成
         ----
@@ -105,8 +119,5 @@ class PackageBase(object):
         MoEar会将其持久化并用于之后的推送任务
 
         :params data dict: 待打包的数据结构
-        :params spider dict: 指定爬虫的信息数据(包括 'meta' 字段的元数据字典，
-            其中需包含书籍名称用的时间戳)
-        :params usermeta dict: 指定用户的package相关配置元数据
         :returns: byteStringIO, 返回生成的书籍打包输出对象
         """
