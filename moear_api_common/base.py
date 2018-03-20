@@ -75,8 +75,6 @@ class PackageBase(object):
 
         :params spider dict: （必须）指定爬虫的信息数据(包括 'meta' 字段的元数据字典，
             其中需包含书籍名称用的时间戳)
-        :params pkgmeta dict: （可选，关键字参数）指定当前package相关的动态配置元数据，
-            如：定制书籍名、作者、时间戳等
         :params usermeta dict: （可选，关键字参数）指定用户的package相关配置元数据，
             如：定制书籍名(book_title)等
         """
