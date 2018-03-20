@@ -71,6 +71,8 @@ class PackageBase(object):
         """
         初始化默认配置参数，可在子类中进行覆盖
 
+        配置优先级为：用户元数据 > Spider元数据 > 具体Package配置 > Package全局默认配置
+
         :params spider dict: （必须）指定爬虫的信息数据(包括 'meta' 字段的元数据字典，
             其中需包含书籍名称用的时间戳)
         :params pkgmeta dict: （可选，关键字参数）指定当前package相关的动态配置元数据，
@@ -78,6 +80,7 @@ class PackageBase(object):
         :params usermeta dict: （可选，关键字参数）指定用户的package相关配置元数据，
             如：定制书籍名(book_title)等
         """
+        # 设置全局默认配置
         dst = {}
         tmp = config.__dict__
         key_list = dir(config)
@@ -87,16 +90,20 @@ class PackageBase(object):
                 dst[k] = v
         self.options = dst
 
-        # 依照优先级，逐级更新 options 数据
-        self.configure(getattr(spider, 'meta', {}))
-        self.configure(getattr(kwargs, 'pkgmeta', {}))
-        self.configure(getattr(kwargs, 'usermeta', {}))
+        # 依照优先级，逐级更新 options 数据，具体Package配置，Spider元数据，用户元数据
+        pkg_opt = self.get_package_options()
+        if not isinstance(pkg_opt, dict):
+            raise TypeError('get_package_options 返回值类型错误：{}'.format(
+                type(pkg_opt)))
+        self.__configure(pkg_opt)
+        self.__configure(getattr(spider, 'meta', {}))
+        self.__configure(getattr(kwargs, 'usermeta', {}))
 
         # 弹出 meta 字段，并赋值实例变量
         spider.pop('meta')
         self.spider = spider
 
-    def configure(self, options):
+    def __configure(self, options):
         """
         更新自定义配置
         --------------
@@ -106,8 +113,6 @@ class PackageBase(object):
 
         另外，该方法会由MoEar服务在使用时主动调用，并传入具体Spider中注册的元数据配置，
         用于覆盖已有配置参数。
-
-        即优先级为：Spider自定义 > 具体Package配置 > Package全局默认配置
         """
         self.options.update(options)
 
