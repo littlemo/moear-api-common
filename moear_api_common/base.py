@@ -112,6 +112,18 @@ class PackageBase(object):
         self.options.update(options)
 
     @abc.abstractmethod
+    def get_package_options(self):
+        """
+        获取包配置项
+        ------------
+
+        该方法返回当前打包类的自定义配置项，由基类在 ``__init__`` 方法中调用，
+        调用点位于，Package默认全局配置完成后，Spider元数据、用户元数据配置前
+
+        :returns: dict, 返回当前打包类的自定义配置项
+        """
+
+    @abc.abstractmethod
     def generate(self, data, *args, **kwargs):
         """
         生成
