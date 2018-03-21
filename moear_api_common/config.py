@@ -9,6 +9,7 @@ import os
 _base_dir = os.path.dirname(os.path.abspath(__file__))
 _assets_dir = os.path.join(_base_dir, 'assets')
 _images_path = os.path.join(_assets_dir, 'images')
+_css_path = os.path.join(_assets_dir, 'css')
 
 # 封面图片，留空则不会为书籍增加封面，size: 600*800
 img_cover = os.path.join(_images_path, 'cv_default.jpg')
@@ -18,6 +19,9 @@ img_masthead = os.path.join(_images_path, 'mh_default.gif')
 
 # 合并图书的封面图片，留空则将所有书籍封面贴在一起
 img_cover_bv = img_cover
+
+# 基础样式文件
+css_base = os.path.join(_css_path, 'base.css')
 
 feeds_title = 'MoEar'
 feeds_desc = 'RSS delivering from MoEar'
