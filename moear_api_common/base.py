@@ -84,7 +84,7 @@ class PackageBase(object):
         key_list = dir(config)
         key_list.remove('os')
         for k, v in tmp.items():
-            if k in key_list and not k.startswith('__'):
+            if k in key_list and not k.startswith('_'):
                 dst[k] = v
         self.options = dst
 
