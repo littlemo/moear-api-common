@@ -6,14 +6,15 @@ Post打包系统默认配置项
 """
 import os
 
-base_dir = os.path.dirname(os.path.abspath(__file__))
-images_path = os.path.join(base_dir, 'images')
+_base_dir = os.path.dirname(os.path.abspath(__file__))
+_assets_dir = os.path.join(_base_dir, 'assets')
+_images_path = os.path.join(_assets_dir, 'images')
 
 # 封面图片，留空则不会为书籍增加封面，size: 600*800
-img_cover = os.path.join(images_path, 'cv_default.jpg')
+img_cover = os.path.join(_images_path, 'cv_default.jpg')
 
 # 报头图片，size: 600*60
-img_masthead = os.path.join(images_path, 'mh_default.gif')
+img_masthead = os.path.join(_images_path, 'mh_default.gif')
 
 # 合并图书的封面图片，留空则将所有书籍封面贴在一起
 img_cover_bv = img_cover
