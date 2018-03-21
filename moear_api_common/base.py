@@ -94,11 +94,10 @@ class PackageBase(object):
             raise TypeError('get_package_options 返回值类型错误：{}'.format(
                 type(pkg_opt)))
         self.__configure(pkg_opt)
-        self.__configure(getattr(spider, 'meta', {}))
-        self.__configure(getattr(kwargs, 'usermeta', {}))
+        self.__configure(spider.pop('meta', {}))
+        self.__configure(kwargs.pop('usermeta', {}))
 
-        # 弹出 meta 字段，并赋值实例变量
-        spider.pop('meta')
+        # 赋值spider实例变量
         self.spider = spider
 
     def __configure(self, options):
