@@ -20,9 +20,50 @@ class SpiderBase(object):
     3. 打包格式化
     """
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
+        """
+        初始化默认配置参数，可在子类中进行覆盖
+
+        配置优先级为：用户元数据 > 具体Package配置 > Common全局默认配置
+
+        :params usermeta dict: （可选，关键字参数）指定用户的package相关配置元数据，
+            如：定制书籍名(book_title)等
+        """
         # 设置全局默认配置
         self.options = get_config_dict(config)
+
+        # 依照优先级，逐级更新 options 数据，具体Spider配置，用户元数据
+        custom_opts = self.hook_custom_options()
+        if not isinstance(custom_opts, dict):
+            raise TypeError('hook_custom_options 返回值类型错误：{}'.format(
+                type(custom_opts)))
+        self.__configure(custom_opts)
+        self.__configure(kwargs.pop('usermeta', {}))
+
+    def __configure(self, options):
+        """
+        更新自定义配置
+        --------------
+
+        该方法用于更新配置信息，Package开发者可在实现具体类时在 ``__init__`` 中进行调用，
+        从而覆盖全局配置。
+
+        另外，该方法会由MoEar服务在使用时主动调用，并传入具体Spider中的定制数据以及用户元数据，
+        用于覆盖已有配置参数。
+        """
+        self.options.update(options)
+
+    @abc.abstractmethod
+    def hook_custom_options(self):
+        """
+        配置定制配置项钩子
+        ------------
+
+        该方法返回当前类的自定义配置项，由基类在 ``__init__`` 方法中调用，
+        调用点位于，Common默认全局配置完成后，用户元数据配置前
+
+        :returns: dict, 返回当前类的自定义配置项
+        """
 
     @abc.abstractmethod
     def register(self, *args, **kwargs):
@@ -73,7 +114,7 @@ class PackageBase(object):
         """
         初始化默认配置参数，可在子类中进行覆盖
 
-        配置优先级为：用户元数据 > Spider元数据 > 具体Package配置 > Package全局默认配置
+        配置优先级为：用户元数据 > Spider元数据 > 具体Package配置 > Common全局默认配置
 
         :params spider dict: （必须）指定爬虫的信息数据(包括 'meta' 字段的元数据字典，
             其中需包含书籍名称用的时间戳)
@@ -84,11 +125,11 @@ class PackageBase(object):
         self.options = get_config_dict(config)
 
         # 依照优先级，逐级更新 options 数据，具体Package配置，Spider元数据，用户元数据
-        pkg_opt = self.get_package_options()
-        if not isinstance(pkg_opt, dict):
-            raise TypeError('get_package_options 返回值类型错误：{}'.format(
-                type(pkg_opt)))
-        self.__configure(pkg_opt)
+        custom_opts = self.hook_custom_options()
+        if not isinstance(custom_opts, dict):
+            raise TypeError('hook_custom_options 返回值类型错误：{}'.format(
+                type(custom_opts)))
+        self.__configure(custom_opts)
         self.__configure(spider.pop('meta', {}))
         self.__configure(kwargs.pop('usermeta', {}))
 
@@ -109,15 +150,15 @@ class PackageBase(object):
         self.options.update(options)
 
     @abc.abstractmethod
-    def get_package_options(self):
+    def hook_custom_options(self):
         """
-        获取包配置项
+        配置定制配置项钩子
         ------------
 
-        该方法返回当前打包类的自定义配置项，由基类在 ``__init__`` 方法中调用，
-        调用点位于，Package默认全局配置完成后，Spider元数据、用户元数据配置前
+        该方法返回当前类的自定义配置项，由基类在 ``__init__`` 方法中调用，
+        调用点位于，Common默认全局配置完成后，Spider元数据、用户元数据配置前
 
-        :returns: dict, 返回当前打包类的自定义配置项
+        :returns: dict, 返回当前类的自定义配置项
         """
 
     @abc.abstractmethod
