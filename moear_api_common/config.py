@@ -23,6 +23,12 @@ img_masthead = os.path.join(_images_path, 'mh_default.gif')
 # 合并图书的封面图片，留空则将所有书籍封面贴在一起
 img_cover_bv = img_cover
 
+# 图片处理约束条件
+img_max_thumb_size = 16 * 1024
+img_max_thumb_dimen = (180, 240)
+# 缩小图片尺寸到 (Width, Height)
+img_reduce_to = (600, 800)
+
 # 基础样式文件
 css_base = os.path.join(_css_path, 'base.css')
 
@@ -48,9 +54,6 @@ color_to_gray = True
 # 切分长图为多个小图（图片高大于指定值）
 # 当值为 None 或 0 时，此功能被关闭
 threshold_split_long_image = 750
-
-# 缩小图片尺寸到 (Width, Height)
-reduce_image_to = None  # (600, 800)
 
 # 截断超过字数限制的邮件主题字串
 subject_wordcnt_for_apmail = 16
