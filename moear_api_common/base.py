@@ -2,6 +2,7 @@ import abc
 import six
 
 from . import config
+from .utils import get_config_dict
 
 
 @six.add_metaclass(abc.ABCMeta)
@@ -20,7 +21,8 @@ class SpiderBase(object):
     """
 
     def __init__(self):
-        pass
+        # 设置全局默认配置
+        self.options = get_config_dict(config)
 
     @abc.abstractmethod
     def register(self, *args, **kwargs):
@@ -79,14 +81,7 @@ class PackageBase(object):
             如：定制书籍名(book_title)等
         """
         # 设置全局默认配置
-        dst = {}
-        tmp = config.__dict__
-        key_list = dir(config)
-        key_list.remove('os')
-        for k, v in tmp.items():
-            if k in key_list and not k.startswith('_'):
-                dst[k] = v
-        self.options = dst
+        self.options = get_config_dict(config)
 
         # 依照优先级，逐级更新 options 数据，具体Package配置，Spider元数据，用户元数据
         pkg_opt = self.get_package_options()

@@ -27,3 +27,14 @@ def mkdirp(path):
             raise
 
     return path
+
+
+def get_config_dict(config):
+    dst = {}
+    tmp = config.__dict__
+    key_list = dir(config)
+    key_list.remove('os')
+    for k, v in tmp.items():
+        if k in key_list and not k.startswith('_'):
+            dst[k] = v
+    return dst
