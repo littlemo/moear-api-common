@@ -2,7 +2,6 @@ import os
 import sys
 import logging
 import unittest
-import shutil
 
 from moear_api_common import utils
 from moear_api_common.utils import img
