@@ -49,7 +49,7 @@ toc_desc_word_limit = 500
 toc_title = 'Table Of Contents'
 
 # TOC描述是否包含图片
-toc_thumbnail_generate = True
+toc_thumbnail_generate = False
 
 # 切分长图为多个小图（图片高大于指定值）
 # 当值为 None 或 0 时，此功能被关闭
