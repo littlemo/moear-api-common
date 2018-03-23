@@ -1,7 +1,7 @@
 import os
 
 
-def find_kindlegen_prog():
+def find_kindlegen_prog(path=None):
     '''
     获取kindlegen程序路径
     ---------------------
@@ -11,7 +11,7 @@ def find_kindlegen_prog():
 
     .. attentions::
 
-        检索 ``PATH`` 路径前，会优先寻找当前路径，并在检索到第一个符合文件后立刻返回
+        检索 ``PATH`` 路径前，会优先寻找指定路径，并在检索到第一个符合文件后立刻返回
 
     :returns: str, kindlegen的绝对路径
     '''
@@ -19,7 +19,7 @@ def find_kindlegen_prog():
         kindlegen_prog = 'kindlegen'
 
         # search in current directory and PATH to find kinglegen
-        path_list = ['.']
+        path_list = [path]
         path_list.extend(os.getenv('PATH').split(':'))
         for p in path_list:
             if p:
