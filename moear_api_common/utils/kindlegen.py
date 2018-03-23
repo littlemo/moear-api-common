@@ -13,6 +13,7 @@ def find_kindlegen_prog(path=None):
 
         检索 ``PATH`` 路径前，会优先寻找指定路径，并在检索到第一个符合文件后立刻返回
 
+    :param path str: 关键字参数，若传入，则优先检测该路径下是否存在 kindlegen 程序
     :returns: str, kindlegen的绝对路径
     '''
     try:
