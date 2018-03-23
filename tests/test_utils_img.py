@@ -34,8 +34,18 @@ class TestUtilsImgMethods(unittest.TestCase):
             raw_img_buf,
             dimen=config.img_max_thumb_dimen,
             maxsizeb=config.img_max_thumb_size)
-        output_path = os.path.join(_build_dir, 'output.jpg')
-        shutil.rmtree(_build_dir, ignore_errors=True)
+        output_path = os.path.join(_build_dir, 'rescale.jpg')
+        utils.mkdirp(_build_dir)
+        with open(output_path, 'wb') as fh:
+            fh.write(data)
+
+    def test_100_gray_image(self):
+        '''测试灰度图片处理的工具方法'''
+        raw_path = os.path.join(_assets_dir, 'raw.jpg')
+        with open(raw_path, 'rb') as fh:
+            raw_img_buf = fh.read()
+        data = img.gray_image(raw_img_buf)
+        output_path = os.path.join(_build_dir, 'gray.jpg')
         utils.mkdirp(_build_dir)
         with open(output_path, 'wb') as fh:
             fh.write(data)

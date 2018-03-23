@@ -29,6 +29,9 @@ img_max_thumb_dimen = (180, 240)
 # 缩小图片尺寸到 (Width, Height)
 img_reduce_to = (600, 800)
 
+# 是否将图片转换为灰度图，这将有利于显著减小输出文件的大小，建议在电纸书上阅读时开启
+img_convert_to_gray = True
+
 # 基础样式文件
 css_base = os.path.join(_css_path, 'base.css')
 
@@ -47,9 +50,6 @@ toc_title = 'Table Of Contents'
 
 # TOC描述是否包含图片
 toc_thumbnail_generate = True
-
-# 是否将图片转换为灰度图，这将有利于显著减小输出文件的大小，建议在电纸书上阅读时开启
-color_to_gray = True
 
 # 切分长图为多个小图（图片高大于指定值）
 # 当值为 None 或 0 时，此功能被关闭

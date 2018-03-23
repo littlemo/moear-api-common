@@ -54,3 +54,23 @@ def rescale_image(
         img.save(data, fmt)
 
     return data.getvalue()
+
+
+def gray_image(data):
+    '''
+    灰度化图片
+
+    将传入的图片数据转换为灰度图后返回
+
+    :param data bytes: 图片字节数据，可通过以 'rb' 模式读取图片文件获得
+    :return: 处理后的图片字节数据，可直接以 'wb' 模式输出到文件中
+    '''
+    if not isinstance(data, BytesIO):
+        data = BytesIO(data)
+    img = Image.open(data)
+    fmt = img.format
+    if img.mode != "L":
+        img = img.convert("L")
+    data = BytesIO()
+    img.save(data, fmt)
+    return data.getvalue()
