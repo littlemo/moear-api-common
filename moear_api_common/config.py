@@ -21,7 +21,7 @@ img_cover = os.path.join(_images_path, 'cv_default.jpg')
 img_masthead = os.path.join(_images_path, 'mh_default.gif')
 
 # 合并图书的封面图片，留空则将所有书籍封面贴在一起
-img_cover_bv = img_cover
+# img_cover_bv = img_cover
 
 # 图片处理约束条件
 img_max_thumb_size = 16 * 1024
@@ -35,25 +35,25 @@ img_convert_to_gray = True
 # 基础样式文件
 css_base = os.path.join(_css_path, 'base.css')
 
-feeds_title = 'MoEar'
-feeds_desc = 'RSS delivering from MoEar'
+# feeds_title = 'MoEar'
+# feeds_desc = 'RSS delivering from MoEar'
 
 # 是否将中文文件名转换为拼音
-pinyin_filename = False
+# pinyin_filename = False
 
 # 是否为TOC条目生成简述
 toc_desc_generate = True
 toc_desc_word_limit = 500
 
 # TOC标题
-toc_title = 'Table Of Contents'
+# toc_title = 'Table Of Contents'
 
 # TOC描述是否包含图片
 toc_thumbnail_generate = False
 
 # 切分长图为多个小图（图片高大于指定值）
 # 当值为 None 或 0 时，此功能被关闭
-threshold_split_long_image = 750
+# threshold_split_long_image = 750
 
 # 截断超过字数限制的邮件主题字串
-subject_wordcnt_for_apmail = 16
+# subject_wordcnt_for_apmail = 16
