@@ -12,7 +12,7 @@ _images_path = os.path.join(_assets_dir, 'images')
 _css_path = os.path.join(_assets_dir, 'css')
 
 # icon路径
-common_icons_path = os.path.join(_assets_dir, 'icons')
+icons_path = os.path.join(_assets_dir, 'icons')
 
 # 封面图片，留空则不会为书籍增加封面，size: 600*800
 img_cover = os.path.join(_images_path, 'cv_default.jpg')
