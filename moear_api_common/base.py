@@ -171,5 +171,5 @@ class PackageBase(object):
         MoEar会将其持久化并用于之后的推送任务
 
         :params data dict: 待打包的数据结构
-        :returns: byteStringIO, 返回生成的书籍打包输出对象
+        :returns: (bytes, ext), 返回生成的书籍打包输出字节与格式扩展名
         """
