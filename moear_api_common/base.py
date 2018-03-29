@@ -149,6 +149,21 @@ class PackageBase(object):
         """
         self.options.update(options)
 
+    @property
+    def ext(self):
+        '''
+        输出文件的扩展名
+
+        .. tip::
+
+            可在 ``hook_custom_options`` 方法中，通过 **filename_extension** 键名
+            来设置
+
+        :return: 扩展名
+        :rtype: str
+        '''
+        return self.options.get('filename_extension')
+
     @abc.abstractmethod
     def hook_custom_options(self):
         """

@@ -11,6 +11,9 @@ _assets_dir = os.path.join(_base_dir, 'assets')
 _images_path = os.path.join(_assets_dir, 'images')
 _css_path = os.path.join(_assets_dir, 'css')
 
+# 打包输出文件的扩展名
+filename_extension = 'mobi'
+
 # icon路径
 icons_path = os.path.join(_assets_dir, 'icons')
 
