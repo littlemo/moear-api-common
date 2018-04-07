@@ -20,7 +20,10 @@
 # import os
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
+import os
+import sys
 import sphinx_rtd_theme
+sys.path.insert(0, os.path.abspath('../..'))
 
 
 # -- General configuration ------------------------------------------------
@@ -42,6 +45,17 @@ extensions = [
     'sphinx.ext.ifconfig',
     'sphinx.ext.viewcode'
 ]
+
+autodoc_default_flags = [
+    'members',
+    # 'undoc-members',
+    'show-inheritance',
+]
+
+autodoc_member_order = 'bysource'
+
+# Include __init__ docstring in class level docs
+autoclass_content = 'both'
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
