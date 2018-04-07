@@ -17,6 +17,7 @@ moear-api-common 文档
    :caption: 接口文档
 
    topics/interface
+   topics/configure
 
 
 .. toctree::
