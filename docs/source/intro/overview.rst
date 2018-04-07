@@ -6,8 +6,9 @@
 
 该项目的目的为给 `MoEar`_ 服务提供接口的定义及常用工具方法的实现。
 
-故该项目本身结构极其简单，下面分别从 **接口定义** 和 **常用工具** 两方面进行说明。
+故该项目本身结构极其简单，下面分别从 :ref:`sec-interface-define` 和 :ref:`sec-utils` 两方面进行说明。
 
+.. _sec-interface-define:
 
 接口定义
 ========
@@ -51,6 +52,12 @@
 --------
 
 当前支持的配置参数主要用于控制打包行为，具体参见 :ref:`topics-configure`
+
+
+.. _sec-utils:
+
+常用工具
+========
 
 
 .. _MoEar: https://github.com/littlemo/moear
