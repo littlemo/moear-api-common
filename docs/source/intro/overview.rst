@@ -24,6 +24,30 @@
 1. 爬虫接口： :class:`.SpiderBase` ，用于定义一个扩展文章爬虫需要实现的所有方法
 2. 打包接口： :class:`.PackageBase` ，用于定义一个扩展打包工具需要实现的所有方法
 
+爬虫接口
+--------
+
+爬虫插件的业务流程为，当 `MoEar`_ 服务启动时，会遍历所有 *setup.py* 中
+``entry_points`` 含有 ``moear.spider`` 入口的 Python 包，并调用其
+:meth:`.SpiderBase.register` 方法，将返回字典持久化到 DB 中。
+
+`MoEar`_ 服务会根据具体 Spider 注册时配置中提供的爬取策略（爬取时间、随机延迟范围等）
+创建计划任务，待任务触发时，调用相应 Spider 插件的 :meth:`.SpiderBase.crawl` 方法，
+执行爬取操作，并等待结果返回后，将其持久化到 DB 中。
+
+.. attention::
+
+    此处 `MoEar`_ 会开启基于 `Celery`_ 的分布式消息队列，并在独立进程中调用相关接口
+
+获取到爬取结果数据后， `MoEar`_ 会在执行打包任务前，
+将从 DB 中获取相应文章数据 & 元数据，生成同 :meth:`.SpiderBase.crawl`
+返回的相同格式的数据结构作为入参，调用 :meth:`.SpiderBase.format` 方法，
+
+.. note::
+
+    具体数据结构，内容，格式，支持的配置项信息，将在稍后参考例程中作详细阐述。
+
 
 .. _MoEar: https://github.com/littlemo/moear
 .. _stevedore: https://docs.openstack.org/stevedore/latest/
+.. _Celery: http://docs.celeryproject.org/en/latest/
