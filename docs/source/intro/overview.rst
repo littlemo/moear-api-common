@@ -47,6 +47,11 @@
 
     具体数据结构，内容，格式，支持的配置项信息，将在稍后参考例程中作详细阐述。
 
+配置说明
+--------
+
+当前支持的配置参数主要用于控制打包行为，具体参见 :ref:`topics-configure`
+
 
 .. _MoEar: https://github.com/littlemo/moear
 .. _stevedore: https://docs.openstack.org/stevedore/latest/

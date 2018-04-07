@@ -1,4 +1,4 @@
-.. _intro-configure:
+.. _topics-configure:
 
 ========
 配置参数
