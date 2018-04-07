@@ -3,8 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to moear-api-common's documentation!
-============================================
+moear-api-common 文档
+=====================
 
 .. toctree::
    :maxdepth: 2
@@ -12,8 +12,8 @@ Welcome to moear-api-common's documentation!
 
 
 
-Indices and tables
-==================
+索引表
+======
 
 * :ref:`genindex`
 * :ref:`modindex`
