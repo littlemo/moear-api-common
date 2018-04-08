@@ -1,2 +1,3 @@
 include moear_api_common/assets/**/*
+exclude .DS_Store
 prune docs/build
