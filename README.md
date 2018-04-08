@@ -23,6 +23,7 @@
 
 [![PyPI](https://img.shields.io/pypi/v/moear-api-common.svg)](https://pypi.org/project/moear-api-common/)
 [![PyPI - Wheel](https://img.shields.io/pypi/wheel/moear-api-common.svg)](https://pypi.org/project/moear-api-common/)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/moear-api-common.svg)](https://pypi.org/project/moear-api-common/)
 [![PyPI - Format](https://img.shields.io/pypi/format/moear-api-common.svg)](https://pypi.org/project/moear-api-common/)
 [![PyPI - Implementation](https://img.shields.io/pypi/implementation/moear-api-common.svg)](https://pypi.org/project/moear-api-common/)
 [![PyPI - Status](https://img.shields.io/pypi/status/moear-api-common.svg)](https://pypi.org/project/moear-api-common/)
