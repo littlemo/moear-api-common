@@ -16,9 +16,6 @@ setup(
     include_package_data=True,
     zip_safe=False,
     license='GPLv3',
-    provides=[
-        'moear.api',
-    ],
     install_requires=[
         'six~=1.11.0',
         'Pillow~=5.0.0',
