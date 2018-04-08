@@ -19,6 +19,14 @@
 
 [![Documentation Status](https://readthedocs.org/projects/moear-api-common/badge/?version=latest)](http://moear-api-common.readthedocs.io/zh_CN/latest/?badge=latest)
 
+### PyPi
+
+[![PyPI](https://img.shields.io/pypi/v/moear-api-common.svg)](https://pypi.org/project/moear-api-common/)
+[![PyPI - Wheel](https://img.shields.io/pypi/wheel/moear-api-common.svg)](https://pypi.org/project/moear-api-common/)
+[![PyPI - Format](https://img.shields.io/pypi/format/moear-api-common.svg)](https://pypi.org/project/moear-api-common/)
+[![PyPI - Implementation](https://img.shields.io/pypi/implementation/moear-api-common.svg)](https://pypi.org/project/moear-api-common/)
+[![PyPI - Status](https://img.shields.io/pypi/status/moear-api-common.svg)](https://pypi.org/project/moear-api-common/)
+
 ### 其他
 
 [![license](https://img.shields.io/github/license/littlemo/moear-api-common.svg)](https://github.com/littlemo/moear-api-common)
