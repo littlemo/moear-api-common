@@ -13,10 +13,16 @@ setup(
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
     keywords='moear api',
-    packages=find_packages(exclude=('docs', 'tests', 'tests.*')),
+    packages=find_packages(exclude=('docs', 'tests*')),
     include_package_data=True,
     zip_safe=False,
     license='GPLv3',
+    python_requires='>=3',
+    project_urls={
+        'Documentation': 'http://moear-api-common.rtfd.io/',
+        'Source': 'https://github.com/littlemo/moear-api-common',
+        'Tracker': 'https://github.com/littlemo/moear-api-common/issues',
+    },
     install_requires=[
         'six~=1.11.0',
         'Pillow~=5.0.0',
