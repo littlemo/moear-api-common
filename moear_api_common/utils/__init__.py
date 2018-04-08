@@ -14,8 +14,8 @@ def mkdirp(path):
     用例:
 
     >>> from moear_api_common.utils import mkdirp
-    >>> mkdirp('test_file')
-    'test_file'
+    >>> mkdirp('build/doctest/test_path')
+    'build/doctest/test_path'
 
     :param str path: 待创建路径
     :return: 创建完成的路径
