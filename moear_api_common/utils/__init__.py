@@ -1,31 +1,28 @@
 import os
-import errno
 
 
 def mkdirp(path):
     """
-    创建传入的路径树
+    创建传入的路径
 
-    Args:
-        path (str):
-            Path containing directories to create
+    该方法为一个串联调用方法，仅对 :func:`os.makedirs` 做了简单封装。
 
-    Returns:
-        str: The passed in path
+    推荐用法::
 
-    Raises:
-        OSError:
-            If some underlying error occurs when calling :func:`os.makedirs`,
-            that is not errno.EEXIST.
+        path_created = mkdirp(path)  # 赋值路径的同时确保其已被创建
+
+    用例:
+
+    >>> from moear_api_common.utils import mkdirp
+    >>> mkdirp('test_file')
+    'test_file'
+
+    :param str path: 待创建路径
+    :return: 创建完成的路径
+    :rtype: str
+    :raises OSError: 调用 :func:`os.makedirs` 时发生的异常，若路径已存在则不抛出异常
     """
-    try:
-        os.makedirs(path)
-    except OSError as exc:
-        if exc.errno == errno.EEXIST and os.path.isdir(path):
-            pass
-        else:
-            raise
-
+    os.makedirs(path, exist_ok=True)
     return path
 
 
