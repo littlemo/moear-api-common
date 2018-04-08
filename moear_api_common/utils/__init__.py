@@ -27,6 +27,15 @@ def mkdirp(path):
 
 
 def get_config_dict(config):
+    '''
+    获取配置数据字典
+
+    对传入的配置包进行格式化处理，生成一个字典对象
+
+    :param object config: 配置模块
+    :return: 配置数据字典
+    :rtype: dict
+    '''
     dst = {}
     tmp = config.__dict__
     key_list = dir(config)
