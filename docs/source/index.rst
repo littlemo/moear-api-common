@@ -25,6 +25,7 @@ moear-api-common 文档
    :caption: 开发进程
 
    development/todo
+   development/release
 
 
 索引表
