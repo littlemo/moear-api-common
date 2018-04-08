@@ -99,4 +99,4 @@
 
 .. _MoEar: https://github.com/littlemo/moear
 .. _stevedore: https://docs.openstack.org/stevedore/latest/
-.. _Celery: http://docs.celeryproject.org/en/latest/
+.. _Celery: https://github.com/celery/celery
