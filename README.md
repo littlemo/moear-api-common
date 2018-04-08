@@ -15,6 +15,10 @@
 [![Github All Releases](https://img.shields.io/github/downloads/littlemo/moear-api-common/total.svg)](https://github.com/littlemo/moear-api-common/releases)
 [![GitHub Release Date](https://img.shields.io/github/release-date/littlemo/moear-api-common.svg)](https://github.com/littlemo/moear-api-common/releases)
 
+### 文档
+
+[![Documentation Status](https://readthedocs.org/projects/moear-api-common/badge/?version=latest)](http://moear-api-common.readthedocs.io/zh_CN/latest/?badge=latest)
+
 ### 其他
 
 [![license](https://img.shields.io/github/license/littlemo/moear-api-common.svg)](https://github.com/littlemo/moear-api-common)
