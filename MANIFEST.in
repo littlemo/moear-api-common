@@ -1,0 +1,2 @@
+include moear_api_common/assets/**/*
+prune docs/build
