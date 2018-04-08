@@ -178,7 +178,7 @@ class PackageBase(object):
         """
         生成
 
-        根据传入的数据结构生成最终用于推送的文件字节字符串对象(byteStringIO)，
+        根据传入的数据结构生成最终用于推送的文件字节字符串(bytes)，
         MoEar会将其持久化并用于之后的推送任务
 
         :param dict data: 待打包的数据结构
