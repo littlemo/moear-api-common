@@ -8,7 +8,7 @@ setup(
     author_email='moore@moorehy.com',
     maintainer='littlemo',
     maintainer_email='moore@moorehy.com',
-    version='1.0.0',
+    version='1.0.2',
     description='为MoEar扩展插件提供接口定义以及通用组件',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
