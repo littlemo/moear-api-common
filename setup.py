@@ -10,9 +10,7 @@ setup(
     maintainer_email='moore@moorehy.com',
     version='1.0.0',
     description='为MoEar扩展插件提供接口定义以及通用组件',
-    long_description='''
-        用以实现抽象类定义MoEar扩展所需提供的服务接口，以及一些通用工具方法
-    ''',
+    long_description=open('docs/source/intro/overview.rst').read(),
     keywords='moear scrapy api',
     packages=find_packages(exclude=('docs', 'tests', 'tests.*')),
     include_package_data=True,
