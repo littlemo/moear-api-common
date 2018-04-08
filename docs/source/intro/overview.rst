@@ -8,6 +8,15 @@
 
 故该项目本身结构极其简单，下面分别从 :ref:`sec-interface-define` 和 :ref:`sec-utils` 两方面进行说明。
 
+
+安装方法
+========
+
+您可以通过 ``pip`` 进行安装，本包仅在 ``Python 3.X`` 下测试通过::
+
+    pip install moear-api-common
+
+
 .. _sec-interface-define:
 
 接口定义
