@@ -79,6 +79,14 @@
 常用工具
 ========
 
+目前提供的工具主要分三块：
+
+#. 系统操作
+#. kindlegen支持
+#. 图片处理
+
+具体接口说明参见 :ref:`topics-utils`
+
 
 .. _MoEar: https://github.com/littlemo/moear
 .. _stevedore: https://docs.openstack.org/stevedore/latest/
