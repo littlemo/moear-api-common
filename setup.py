@@ -12,7 +12,7 @@ setup(
     description='为MoEar扩展插件提供接口定义以及通用组件',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
-    keywords='moear scrapy api',
+    keywords='moear api',
     packages=find_packages(exclude=('docs', 'tests', 'tests.*')),
     include_package_data=True,
     zip_safe=False,
