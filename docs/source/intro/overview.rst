@@ -97,6 +97,6 @@
 具体接口说明参见 :ref:`topics-utils`
 
 
-.. _MoEar: https://github.com/littlemo/moear
+.. _MoEar: http://moear.rtfd.io
 .. _stevedore: https://docs.openstack.org/stevedore/latest/
-.. _Celery: https://github.com/celery/celery
+.. _Celery: http://docs.celeryproject.org
