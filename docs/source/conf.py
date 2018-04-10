@@ -110,9 +110,6 @@ todo_include_todos = True
 html_theme = "sphinx_rtd_theme"
 html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 
-# 关闭页面右上方的查看页面源码链接显示
-html_show_sourcelink = False
-
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
