@@ -25,7 +25,7 @@ setup(
     },
     install_requires=[
         'six~=1.11.0',
-        'Pillow~=5.0.0',
+        'Pillow>=5.0,<8.2',
     ],
     entry_points={},
     classifiers=[
